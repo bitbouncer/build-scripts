@@ -9,11 +9,14 @@ REM del avro-src-1.8.0.tar
 REM mkdir avro-src-1.8.0\lang\c++\avro
 REM xcopy /s /y avro-src-1.8.0\lang\c++\api\* avro-src-1.8.0\lang\c++\avro
 
+git clone https://github.com/bitbouncer/json-spirit
+git clone https://github.com/bitbouncer/csi-http-common.git
+git clone https://github.com/bitbouncer/csi-http-client.git
+git clone https://github.com/bitbouncer/csi-http-server.git
+
 git clone https://github.com/bitbouncer/postgres-asio.git
 git clone https://github.com/bitbouncer/csi-kafka.git
-git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-avro-utils.git
-git clone https://github.com/bitbouncer/json-spirit
 git clone https://github.com/bitbouncer/csi-samples
 git clone https://github.com/bitbouncer/kafka2influx
 git clone https://github.com/bitbouncer/phoebe

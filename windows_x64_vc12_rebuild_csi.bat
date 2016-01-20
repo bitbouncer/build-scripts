@@ -5,105 +5,50 @@ call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\v
 
 cd json-spirit
 git pull
-rmdir /S /Q bin\x64
-rmdir /S /Q lib\x64
-rmdir /S /Q win_build64
-mkdir win_build64 
-cd win_build64
-cmake -G "Visual Studio 12 Win64" ..
-msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
-msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
-cd ..
+call rebuild_win64_vc12.bat
 cd ..
 
-cd csi-http
+cd csi-http-common
 git pull
-rmdir /S /Q bin\x64
-rmdir /S /Q lib\x64
-rmdir /S /Q win_build64
-mkdir win_build64 
-cd win_build64
-cmake -D__CSI_HAS_OPENSSL__=1  -G "Visual Studio 12 Win64" ..
-msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
-msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
+call rebuild_win64_vc12.bat
 cd ..
+
+cd csi-http-client
+git pull
+call rebuild_win64_vc12.bat
+cd ..
+
+cd csi-http-server
+git pull
+call rebuild_win64_vc12.bat
 cd ..
 
 cd csi-avro-utils
 git pull
-rmdir /S /Q bin\x64
-rmdir /S /Q lib\x64
-rmdir /S /Q win_build64
-mkdir win_build64 
-cd win_build64
-cmake -D__CSI_HAS_OPENSSL__=1  -G "Visual Studio 12 Win64" ..
-msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
-msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
-cd ..
+call rebuild_win64_vc12.bat
 cd ..
 
 cd postgres-asio
 git pull
-rmdir /S /Q bin\x64
-rmdir /S /Q lib\x64
-rmdir /S /Q win_build64
-mkdir win_build64 
-cd win_build64
-cmake -D__CSI_HAS_OPENSSL__=1  -G "Visual Studio 12 Win64" ..
-msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
-msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
+call rebuild_win64_vc12.bat
 cd ..
-cd ..
-
 
 cd csi-kafka
 git pull
-rmdir /S /Q bin\x64
-rmdir /S /Q lib\x64
-rmdir /S /Q win_build64
-mkdir win_build64 
-cd win_build64
-cmake  -G "Visual Studio 12 Win64" ..
-msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
-msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
-cd ..
+call rebuild_win64_vc12.bat
 cd ..
 
 cd csi-samples
 git pull
-rmdir /S /Q bin\x64
-rmdir /S /Q lib\x64
-rmdir /S /Q win_build64
-mkdir win_build64 
-cd win_build64
-cmake  -G "Visual Studio 12 Win64" ..
-msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
-msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
-cd ..
+call rebuild_win64_vc12.bat
 cd ..
 
 cd kafka2influx
 git pull
-rmdir /S /Q bin\x64
-rmdir /S /Q lib\x64
-rmdir /S /Q win_build64
-mkdir win_build64 
-cd win_build64
-cmake  -G "Visual Studio 12 Win64" ..
-msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
-msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
-cd ..
+call rebuild_win64_vc12.bat
 cd ..
 
 cd phoebe
 git pull
-rmdir /S /Q bin\x64
-rmdir /S /Q lib\x64
-rmdir /S /Q win_build64
-mkdir win_build64 
-cd win_build64
-cmake  -G "Visual Studio 12 Win64" ..
-msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
-msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
-cd ..
+call rebuild_win64_vc12.bat
 cd ..
