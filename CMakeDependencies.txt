@@ -80,7 +80,7 @@ endif() #WIN32
 
 
 if(__LINUX__)
-INCLUDE(${CMAKE_SOURCE_DIR}/../csi-build-scripts/CheckLSBTypes.cmake)
+INCLUDE(${CMAKE_SOURCE_DIR}/../build-scripts/CheckLSBTypes.cmake)
 if(LSB_DISTRIBUTOR_ID STREQUAL "centos")
 add_definitions(-D__CENTOS__)
 endif()
