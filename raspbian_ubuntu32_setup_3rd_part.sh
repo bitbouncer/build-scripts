@@ -4,7 +4,7 @@ export JOYENT_HTTP_VERSION=2.3
 export SQLPP11_VERSION=0.33
 export C_ARES_VERSION=1.10.0
 export CURL_VERSION=7.46.0
-
+export SNAPPY_VERSION=1.1.3
 export ZLIB_VERSION=1.2.8
 export BZLIB2_VERSION=1.0.6
 export OPEN_SSL_VERSION=openssl-1.0.2e
@@ -20,6 +20,10 @@ rm  curl-$CURL_VERSION.tar.bz2
 wget http://sourceforge.net/projects/boost/files/boost/$BOOST_VERSION_DOTTED/boost_$BOOST_VERSION.tar.gz/download -Oboost_$BOOST_VERSION.tar.gz
 tar xf boost_$BOOST_VERSION.tar.gz
 rm boost_$BOOST_VERSION.tar.gz
+
+wget --no-check-certificate https://github.com/google/snappy/releases/download/$SNAPPY_VERSION/snappy-$SNAPPY_VERSION.tar.gz  -Osnappy-$SNAPPY_VERSION.tar.gz
+tar xf snappy-$SNAPPY_VERSION.tar.gz
+rm snappy-$SNAPPY_VERSION.tar.gz
 
 wget http://zlib.net/zlib-$ZLIB_VERSION.tar.gz
 tar xf zlib-$ZLIB_VERSION.tar.gz
