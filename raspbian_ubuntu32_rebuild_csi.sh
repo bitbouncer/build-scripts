@@ -1,10 +1,9 @@
 export BOOST_VERSION=1_59_0
 export BOOST_VERSION_DOTTED=1.59.0
-export CURL_VERSION=7.42.1
-export ZLIB_VERSION=1.2.8
-export BZLIB2_VERSION=1.0.6
-export OPEN_SSL_VERSION=1.0.1j
 export JOYENT_HTTP_VERSION=2.3
+export SQLPP11_VERSION=0.33
+export C_ARES_VERSION=1.10.0
+export CURL_VERSION=7.42.1
 export AVRO_DIR=avro/lang/c++
 
 pushd $AVRO_DIR
@@ -17,53 +16,40 @@ cp -r $AVRO_DIR/api/* $AVRO_DIR/avro
 
 cd json-spirit
 git pull
-bash -e build_linux.sh
+bash -e build_cross_raspbian.sh
 cd ..
 
 cd csi-http
 git pull
-bash -e build_linux.sh
+bash -e build_cross_raspbian.sh
 cd ..
 
-#cd avro-cpp-$AVRO_VERSION
-#export BOOST_ROOT=$PWD/../boost_$BOOST_VERSION 
-#export Boost_INCLUDE_DIR=$PWD/../boost_$BOOST_VERSION/boost
-#export PI_TOOLS_HOME=~/xtools/tools
-#rm -rf avro
-#rm -rf build
-#mkdir build
-#cd build
-#cmake -DCMAKE_TOOLCHAIN_FILE=../csi-build-scripts/toolchains/raspberry.ia32.cmake ..
-#make -j4
-#cd ..
-#mkdir avro
-#cp -r api/*.* avro
-#cd ..
-
-
-cd json-spirit
-#export PI_TOOLS_HOME=~/xtools/tools
-#rm -rf build
-#mkdir build
-#cd build
-#cmake -D__LINUX__=1 -DCMAKE_TOOLCHAIN_FILE=../csi-build-scripts/toolchains/raspberry.ia32.cmake ..
-#make -j4
-#cd ..
-bash ./build_cross_raspbian.sh
+cd csi-avro-utils
+git pull
+bash -e build_cross_raspbian.sh
 cd ..
 
-cd csi-http
-bash ./build_cross_raspbian.sh
-#rm -rf build
-#rm -rf lib
-#mkdir build
-#cd build
-#cmake -D__CSI_HAS_OPENSSL__=1 -D__LINUX__=1 -DCMAKE_TOOLCHAIN_FILE=../csi-build-scripts/toolchains/raspberry.ia32.cmake ..
-#make -j4
-#cd ..
+cd csi-kafka
+git pull
+bash -e build_cross_raspbian.sh
 cd ..
 
+#cd postgres-asio
+#git pull
+#bash -e build_cross_raspbian.sh
+#cd ..
 
+cd csi-samples
+git pull
+bash -e build_cross_raspbian.sh
+cd ..
 
+cd phoebe
+git pull
+bash -e build_cross_raspbian.sh
+cd ..
 
-
+cd kafka2influx
+git pull
+bash -e build_cross_raspbian.sh
+cd ..

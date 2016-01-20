@@ -6,9 +6,6 @@ cp -r avro/lang/c++/api/* avro/lang/c++/avro
 rm -rf json-spirit
 git clone https://github.com/bitbouncer/json-spirit
 
-rm -rf postgres-asio
-git clone https://github.com/bitbouncer/postgres-asio
-
 rm -rf csi-http-common
 git clone https://github.com/bitbouncer/csi-http-common.git
 
@@ -32,5 +29,8 @@ git clone https://github.com/bitbouncer/kafka2influx
 
 rm -rf phoebe
 git clone https://github.com/bitbouncer/phoebe
+
+#rm -rf postgres-asio
+#git clone https://github.com/bitbouncer/postgres-asio
 
 
