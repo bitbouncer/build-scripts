@@ -1,0 +1,231 @@
+SET(OPENSSLPATH             ${CMAKE_SOURCE_DIR}/../openssl-1.0.1j)
+SET(SNAPPY_PATH             ${CMAKE_SOURCE_DIR}/../snappy-1.1.3)
+SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
+SET(BOOST_PATH              ${CMAKE_SOURCE_DIR}/../boost_1_59_0)
+SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
+
+# WE ARE CURRENTLY USING A BRANCH OF AVRO CPP (snappy compression and less warnings)
+#SET(AVROCPP_PATH          ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
+SET(AVROCPP_PATH            ${CMAKE_SOURCE_DIR}/../avro/lang/c++) 
+#SET(AVROCPP_PATH            ${CMAKE_SOURCE_DIR}/../avro-src-1.8.0/lang/c++) 
+
+SET(HTTP_PARSER_PATH        ${CMAKE_SOURCE_DIR}/../http-parser-2.3)
+
+if(WIN32)
+# SET(C_ARES_PATH           ${CMAKE_SOURCE_DIR}/../c-ares-1.10.0)  release does not compile with vs2013 (trunk does)
+SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares-master)
+endif()
+
+if(__LINUX__)
+SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares-1.10.0)
+endif()
+
+SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.42.1)
+SET(JSON_SPIRIT_PATH        ${CMAKE_SOURCE_DIR}/../json-spirit)
+SET(POSTGRES_ASIO_PATH      ${CMAKE_SOURCE_DIR}/../postgres-asio)
+SET(CSI_HTTP_COMMON_PATH    ${CMAKE_SOURCE_DIR}/../csi-http-common)
+SET(CSI_HTTP_CLIENT_PATH    ${CMAKE_SOURCE_DIR}/../csi-http-client)
+SET(CSI_HTTP_SERVER_PATH    ${CMAKE_SOURCE_DIR}/../csi-http-server)
+SET(CSI_AVRO_UTILS_PATH     ${CMAKE_SOURCE_DIR}/../csi-avro-utils)
+SET(CSI_KAFKA_PATH          ${CMAKE_SOURCE_DIR}/../csi-kafka)
+
+include_directories(
+	${CMAKE_SOURCE_DIR} 
+	${ZLIB_PATH}
+    ${SNAPPY_PATH}
+    ${AVROCPP_PATH}    
+	${BOOST_PATH} 
+    ${CSI_HTTP_COMMON_PATH}
+	${CSI_HTTP_CLIENT_PATH}
+	${CSI_HTTP_SERVER_PATH}
+    ${CSI_AVRO_UTILS_PATH}
+    ${CSI_KAFKA_PATH}
+    ${HTTP_PARSER_PATH}
+	${JSON_SPIRIT_PATH}
+    ${C_ARES_PATH}
+    ${POSTGRES_ASIO_PATH}
+    ${LIBCURL_PATH}/include
+ 
+)
+
+if(WIN32)
+include_directories(
+    ${OPENSSLPATH}/inc32
+)
+
+link_directories(
+    ${CMAKE_SOURCE_DIR}/lib/$(Platform)
+    ${OPENSSLPATH}/out32
+    ${BOOST_PATH}/lib/$(Platform)/lib
+    ${LIBCURL_PATH}/libs/$(Platform)/$(Configuration)
+	${C_ARES_PATH}/libs/$(Platform)/$(Configuration)
+    ${JSON_SPIRIT_PATH}/lib/$(Platform)/$(Configuration)
+    ${CSI_HTTP_COMMON_PATH}/lib/$(Platform)/$(Configuration)
+	${CSI_HTTP_CLIENT_PATH}/lib/$(Platform)/$(Configuration)
+	${CSI_HTTP_SERVER_PATH}/lib/$(Platform)/$(Configuration)
+    ${CSI_AVRO_UTILS_PATH}/lib/$(Platform)/$(Configuration)
+    ${CSI_KAFKA_PATH}/lib/$(Platform)/$(Configuration)
+    ${POSTGRES_ASIO_PATH}/lib/$(Platform)/$(Configuration)
+)
+
+add_definitions(-DCURL_STATICLIB)
+add_definitions(-DCARES_STATICLIB)
+ADD_LIBRARY(ZLIB STATIC IMPORTED)
+#SET_TARGET_PROPERTIES(ZLIB PROPERTIES IMPORTED_LOCATION ${ZLIB_PATH}/lib/zdll.lib)
+SET_TARGET_PROPERTIES(ZLIB PROPERTIES IMPORTED_LOCATION ${ZLIB_PATH}/zdll.lib)
+
+SET(LIBRARY_OUTPUT_PATH     ${CMAKE_SOURCE_DIR}/lib/$(Platform))
+SET(EXECUTABLE_OUTPUT_PATH  ${CMAKE_SOURCE_DIR}/bin/$(Platform))
+endif() #WIN32
+
+
+if(__LINUX__)
+INCLUDE(${CMAKE_SOURCE_DIR}/../csi-build-scripts/CheckLSBTypes.cmake)
+if(LSB_DISTRIBUTOR_ID STREQUAL "centos")
+add_definitions(-D__CENTOS__)
+endif()
+
+include_directories(${OPENSSLPATH}/include)
+
+link_directories(
+    ${CMAKE_SOURCE_DIR}/lib
+    ${BOOST_PATH}/stage/lib
+    ${LIBCURL_PATH}/lib/.libs
+    ${C_ARES_PATH}/.libs
+	${SNAPPY_PATH}/.libs
+    ${OPENSSLPATH}
+    ${CSI_HTTP_COMMON_PATH}/lib
+	${CSI_HTTP_CLIENT_PATH}/lib
+	${CSI_HTTP_SERVER_PATH}/lib
+    ${CSI_AVRO_UTILS_PATH}/lib
+    ${CSI_KAFKA_PATH}/lib
+    ${JSON_SPIRIT_PATH}/lib
+    ${POSTGRES_ASIO_PATH}/lib
+)
+
+if (USE_BUILTIN_CURL)
+SET(LIBCURL curl)
+else()
+ADD_LIBRARY(LIBCURL STATIC IMPORTED)
+SET_TARGET_PROPERTIES(LIBCURL PROPERTIES IMPORTED_LOCATION ${LIBCURL_PATH}/lib/.libs/libcurl.a)
+add_definitions(-DCURL_STATICLIB)
+SET(LIBCURL LIBCURL)
+
+ADD_LIBRARY(LIBCARES STATIC IMPORTED)
+SET_TARGET_PROPERTIES(LIBCARES PROPERTIES IMPORTED_LOCATION ${LIBCARES_PATH}/.libs/libcares.a)
+add_definitions(-DCARES_STATICLIB)
+SET(LIBCARES LIBCARES)
+endif()
+
+set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
+SET(EXECUTABLE_OUTPUT_PATH  ${CMAKE_SOURCE_DIR}/bin)
+
+#release build on linux
+SET(CMAKE_BUILD_TYPE Release)
+SET(CMAKE_CXX_FLAGS_DISTRIBUTION "-O3")
+SET(CMAKE_C_FLAGS_DISTRIBUTION "-O3")
+endif() #LINUX
+
+if(__DARWIN__)
+include_directories(/opt/X11/include)
+
+SET(LIBRARY_OUTPUT_PATH     ${CMAKE_SOURCE_DIR}/lib)
+SET(EXECUTABLE_OUTPUT_PATH  ${CMAKE_SOURCE_DIR}/bin)
+
+ADD_LIBRARY(LIBCURL STATIC IMPORTED)
+SET_TARGET_PROPERTIES(LIBCURL PROPERTIES IMPORTED_LOCATION ${LIBCURL_PATH}/lib/.libs/libcurl.a)
+add_definitions(-DCURL_STATICLIB)
+
+link_directories(
+    ${CMAKE_SOURCE_DIR}/lib
+    ${BOOST_PATH}/stage/lib
+    ${OPENSSLPATH}
+    ${CSI_HTTP_COMMON_PATH}/lib
+	${CSI_HTTP_CLIENT_PATH}/lib
+	${CSI_HTTP_SERVER_PATH}/lib
+    ${CSI_AVRO_UTILS_PATH}/lib
+    ${CSI_KAFKA_PATH}/lib
+    ${JSON_SPIRIT_PATH}/lib
+    )
+endif() #END DARWIN
+
+#END DEPENDENCIES
+
+#COMMON DEFINITIONS
+add_definitions(-D_FILE_OFFSET_BITS=64 -D_REENTRANT -DEXTERNAL_LOCKS -DMULTITHREAD)
+add_definitions(-DBOOST_ASIO_HAS_STD_CHRONO)
+add_definitions(-DBOOST_ALL_STATIC_LINK)
+
+if(WIN32)
+add_definitions(-DMARCH_x86_64) 
+#needed for win32 where autotools has not been run
+add_definitions(-DVERSION="csi-internal")
+#min windows 7
+add_definitions(-D_WIN32_WINNT=0x0602) # win8.1 to get nthll 64 bit
+add_definitions(-DWINVER=0x0601)
+add_definitions(-DCF_WINDOWS)
+add_definitions(/MP)
+add_definitions(/bigobj)
+add_definitions(-D_UNICODE)
+add_definitions(-DUNICODE)
+add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+add_definitions(-DSECURITY_WIN32)
+add_definitions(/wd4996) #'strdup': The POSIX name for this item is deprecated
+add_definitions(/wd4197) # 'cf_atomic32' : top-level volatile in cast is ignored
+add_definitions(/wd4200) #nonstandard extension used : zero-sized array in struct/union 
+
+endif()
+
+
+if(__LINUX__)
+add_definitions(-D__LINUX__)
+add_definitions(-fPIC)
+#if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.8.0")
+add_definitions(-std=c++11)
+#endif()
+add_definitions(-DBOOST_LOG_USE_NATIVE_SYSLOG)
+add_definitions(-Wno-deprecated)
+endif()
+
+
+if(__DARWIN__)
+SET (LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
+ADD_LIBRARY(LIBCURL STATIC IMPORTED)
+SET_TARGET_PROPERTIES(LIBCURL PROPERTIES IMPORTED_LOCATION ${LIBCURL_PATH}/lib/.libs/libcurl.a)
+add_definitions(-DCURL_STATICLIB)
+add_definitions(-D__DARWIN__)
+add_definitions(-fPIC)
+add_definitions(-std=c++11)
+include_directories(/opt/X11/include)
+link_directories(${BOOST_PATH}/stage/lib ${CMAKE_SOURCE_DIR}/lib ${CURL_LIB_PATH} ${JSON_SPIRIT_LIB_PATH})
+endif()
+
+if(WIN32)
+set(CSI_HTTP_CLIENT_LIBS csi-http-client csi-http-common csi-avro json_spirit csi-snappy libcurl libeay32 ssleay32 Ws2_32 ZLIB) 
+set(CSI_HTTP_SERVER_LIBS csi-http-server csi-avro-utils csi-http-parser  ${CSI_HTTP_CLIENT_LIBS}) 
+set(CSI_KAFKA_LIBS csi-kafka ${CSI_HTTP_SERVER_LIBS})
+endif()
+
+if(__LINUX__)
+if(LSB_DISTRIBUTOR_ID STREQUAL "centos")
+set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro snappy boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_program_options boost_filesystem boost_regex boost_chrono boost_iostreams curl cares idn ldap lber ssl crypto rt pthread z c)
+else()
+set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro snappy boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_program_options boost_filesystem boost_regex boost_chrono boost_iostreams curl cares idn ldap lber ssl crypto rt pthread z rtmp c)
+endif()
+
+#just override if we're crosscompiling for raspberry
+if(__RASPBIAN__)
+set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_program_options boost_filesystem boost_regex boost_chrono boost_iostreams curl cares ssl crypto rt pthread c)
+endif()
+
+set(CSI_KAFKA_LIBS csi-kafka csi-avro-utils json_spirit ${CSI_HTTP_LIBS})
+endif()
+
+#most likely wrong since I don't have a mac anymore...
+if(__DARWIN__)
+set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_filesystem boost_locale LIBCURL crypto ssl stdc++ pthread c)
+set(CSI_KAFKA_LIBS csi-kafka csi-avro-utils json_spirit ${CSI_HTTP_LIBS})
+endif()
+
+
