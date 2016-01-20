@@ -203,8 +203,8 @@ endif()
 
 if(WIN32)
 set(CSI_HTTP_CLIENT_LIBS csi-http-client csi-http-common csi-avro json_spirit csi-snappy libcurl libeay32 ssleay32 Ws2_32 ZLIB) 
-set(CSI_HTTP_SERVER_LIBS csi-http-server csi-avro-utils csi-http-parser  ${CSI_HTTP_CLIENT_LIBS}) 
-set(CSI_KAFKA_LIBS csi-kafka ${CSI_HTTP_SERVER_LIBS})
+set(CSI_HTTP_SERVER_LIBS csi-http-server csi-http-parser  ${CSI_HTTP_CLIENT_LIBS}) 
+set(CSI_KAFKA_LIBS csi-kafka csi-avro-utils ${CSI_HTTP_SERVER_LIBS})
 endif()
 
 if(__LINUX__)
