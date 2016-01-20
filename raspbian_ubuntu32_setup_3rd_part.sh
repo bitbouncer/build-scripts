@@ -78,6 +78,14 @@ sed -i 's/ -O/ -Os/g' Makefile
 make
 cd ..
 
+#build snappy
+cd snappy-$SNAPPY_VERSION
+export CFLAGS='-O2 -march=armv6j -mfpu=vfp -mfloat-abi=hard'
+export CC=arm-linux-gnueabihf-gcc
+./configure --host=arm-linux-gnueabihf --disable-shared
+make
+cd ..
+
 #cd avro-cpp-$AVRO_VERSION
 #export BOOST_ROOT=$PWD/../boost_$BOOST_VERSION 
 #export Boost_INCLUDE_DIR=$PWD/../boost_$BOOST_VERSION/boost
