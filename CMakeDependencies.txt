@@ -1,8 +1,9 @@
-SET(OPENSSLPATH             ${CMAKE_SOURCE_DIR}/../openssl-1.0.1j)
+SET(OPENSSLPATH             ${CMAKE_SOURCE_DIR}/../openssl-1.0.2e)
 SET(SNAPPY_PATH             ${CMAKE_SOURCE_DIR}/../snappy-1.1.3)
 SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
 SET(BOOST_PATH              ${CMAKE_SOURCE_DIR}/../boost_1_59_0)
 SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
+SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.46.0)
 
 # WE ARE CURRENTLY USING A BRANCH OF AVRO CPP (snappy compression and less warnings)
 #SET(AVROCPP_PATH          ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
@@ -20,7 +21,6 @@ if(__LINUX__)
 SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares-1.10.0)
 endif()
 
-SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.42.1)
 SET(JSON_SPIRIT_PATH        ${CMAKE_SOURCE_DIR}/../json-spirit)
 SET(POSTGRES_ASIO_PATH      ${CMAKE_SOURCE_DIR}/../postgres-asio)
 SET(CSI_HTTP_COMMON_PATH    ${CMAKE_SOURCE_DIR}/../csi-http-common)

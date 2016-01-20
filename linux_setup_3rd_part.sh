@@ -4,7 +4,7 @@ export BOOST_VERSION_DOTTED=1.59.0
 export JOYENT_HTTP_VERSION=2.3
 export SQLPP11_VERSION=0.33
 export C_ARES_VERSION=1.10.0
-export CURL_VERSION=7.42.1
+export CURL_VERSION=7.46.0
 
 wget http://c-ares.haxx.se/download/c-ares-$C_ARES_VERSION.tar.gz
 tar xvf c-ares-$C_ARES_VERSION.tar.gz

@@ -3,11 +3,11 @@ export BOOST_VERSION_DOTTED=1.59.0
 export JOYENT_HTTP_VERSION=2.3
 export SQLPP11_VERSION=0.33
 export C_ARES_VERSION=1.10.0
-export CURL_VERSION=7.42.1
+export CURL_VERSION=7.46.0
 
 export ZLIB_VERSION=1.2.8
 export BZLIB2_VERSION=1.0.6
-export OPEN_SSL_VERSION=1.0.1j
+export OPEN_SSL_VERSION=openssl-1.0.2e
 
 wget http://c-ares.haxx.se/download/c-ares-$C_ARES_VERSION.tar.gz
 tar xf c-ares-$C_ARES_VERSION.tar.gz
@@ -29,9 +29,9 @@ wget http://www.bzip.org/$BZLIB2_VERSION/bzip2-$BZLIB2_VERSION.tar.gz
 tar xvf bzip2-$BZLIB2_VERSION.tar.gz
 rm bzip2-$BZLIB2_VERSION.tar.gz
 
-wget  http://www.openssl.org/source/openssl-$OPEN_SSL_VERSION.tar.gz -Oopenssl-$OPEN_SSL_VERSION.tar.gz
-tar xf openssl-$OPEN_SSL_VERSION.tar.gz
-rm openssl-$OPEN_SSL_VERSION.tar.gz
+wget  http://www.openssl.org/source/$OPEN_SSL_VERSION.tar.gz -O$OPEN_SSL_VERSION.tar.gz
+tar xf $OPEN_SSL_VERSION.tar.gz
+rm $OPEN_SSL_VERSION.tar.gz
 
 #wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-$AVRO_VERSION/cpp/avro-cpp-$AVRO_VERSION.tar.gz
 #tar xf avro-cpp-$AVRO_VERSION.tar.gz
@@ -66,7 +66,7 @@ make
 cd ..
 
 #build openssl
-cd openssl-$OPEN_SSL_VERSION
+cd $OPEN_SSL_VERSION
 export CFLAGS='-Os -march=armv6j -mfpu=vfp -mfloat-abi=hard'
 export CC=arm-linux-gnueabihf-gcc
 ./Configure dist threads -D_REENTRANT no-shared
