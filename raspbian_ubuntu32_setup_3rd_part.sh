@@ -92,10 +92,10 @@ cd ..
 
 #zlib & bzip2 needs to be there for boost iostreams to compile but since were not using it at the moment - could be skipped
 
-cd zlib-$ZLIB_VERSION
-./configure --static
-make
-cd ..
+#cd zlib-$ZLIB_VERSION
+#./configure --static
+#make
+#cd ..
 
 #the test fails here but we do not care...
 cd bzip2-$BZLIB2_VERSION
