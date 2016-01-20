@@ -89,9 +89,9 @@ Get and build nessessary dependencies
 ```
 mkdir raspbian_source
 cd raspbian_source
-git clone https://github.com/bitbouncer/csi-build-scripts.git
+git clone https://github.com/bitbouncer/build-scripts.git
 bash build-scripts/raspbian_ubuntu32_setup_3rd_part.sh
-bash build-scripts/linux_get_csi.sh
+bash build-scripts/raspbian_ubuntu32_get_csi.sh
 bash build-scripts/raspbian_ubuntu32_rebuild_csi.sh
 ```
 
