@@ -19,7 +19,17 @@ git pull
 bash -e build_linux.sh
 cd ..
 
-cd csi-http
+cd csi-http-common
+git pull
+bash -e build_linux.sh
+cd ..
+
+cd csi-http-client
+git pull
+bash -e build_linux.sh
+cd ..
+
+cd csi-http-server
 git pull
 bash -e build_linux.sh
 cd ..
