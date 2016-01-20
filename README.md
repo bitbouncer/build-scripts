@@ -1,4 +1,4 @@
-csi-build-scripts
+build-scripts
 =================
 Common buildscripts for bitbouncer repos. 
 
@@ -6,15 +6,15 @@ Downloads and build all required libs. The purpose is to have a common build sys
 
 Downloads and builds (where needed)
   * cares              1.10.0 
-  * libcurl            7.0.42 
+  * libcurl            7.46.0 
   * joyent_http_parser 2.3 
   * boost              1.59
   * snappy             1.1.3
   * avro_cpp           1.7.7
-  * openSSL            1.0.1j (windows)
+  * openSSL            1.0.2e (windows+raspberry)
   * zlib               1.2.8  (windows)
-  * libevent           2.0.21 (windows)
-  * pthread            2.9.1  (windows)
+  * 
+  
   
 ## Windows x64 - Visual Studio 12
 
@@ -24,10 +24,10 @@ Install Visual Studio, cmake, nasm, git and active perl manually, make sure acti
 
 mkdir source
 cd source
-git clone https://github.com/bitbouncer/csi-build-scripts.git
-csi-build-scripts\windows_x64_vc12_setup_3rd_part.bat
-csi-build-scripts\windows_x64_vc12_get_csi.bat
-csi-build-scripts\windows_x64_vc12_rebuild_csi.bat
+git clone https://github.com/bitbouncer/build-scripts.git
+build-scripts\windows_x64_vc12_setup_3rd_part.bat
+build-scripts\windows_x64_vc12_get_csi.bat
+build-scripts\windows_x64_vc12_rebuild_csi.bat
 ```
 
 ## Ubuntu 14 x64:
@@ -43,12 +43,12 @@ Get and build necessary dependencies
 ```
 mkdir source
 cd source
-git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/linux_setup_3rd_part.sh
+git clone https://github.com/bitbouncer/build-scripts.git
+bash build-scripts/linux_setup_3rd_part.sh
 (run this part first - it will stop after a sudo)
 
-bash csi-build-scripts/linux_get_csi.sh
-bash csi-build-scripts/linux_rebuild_csi.sh
+bash build-scripts/linux_get_csi.sh
+bash build-scripts/linux_rebuild_csi.sh
 ```
 
 
@@ -65,12 +65,10 @@ Get and build necessary dependencies
 ```
 mkdir source
 cd source
-git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/linux_setup_3rd_part.sh
-(run this part first - it will stop after a sudo)
-
-bash csi-build-scripts/linux_get_csi.sh
-bash csi-build-scripts/linux_rebuild_csi.sh
+git clone https://github.com/bitbouncer/build-scripts.git
+bash build-scripts/linux_setup_3rd_part.sh
+bash build-scripts/linux_get_csi.sh
+bash build-scripts/linux_rebuild_csi.sh
 ```
 
 ## Raspberry Pi - cross compiling on ubuntu14 x32
@@ -92,35 +90,9 @@ Get and build nessessary dependencies
 mkdir raspbian_source
 cd raspbian_source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/raspbian_ubuntu32_setup_3rd_part.sh
-bash csi-build-scripts/linux_get_csi.sh
-bash csi-build-scripts/raspbian_ubuntu32_rebuild_csi.sh
-```
-
-## Ubuntu 12 x64 (deprecated): 
-
-Install build tools
-```
-sudo apt-get install -y software-properties-common python-software-properties
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-sudo apt-get update
-sudo apt-get install -y automake autogen shtool libtool git wget cmake unzip build-essential g++ python-dev autotools-dev libicu-dev zlib1g-dev openssl libssl-dev libcurl4-openssl-dev libbz2-dev libcurl3 libboost-all-dev libpq-dev
-sudo apt-get install -y gcc-4.8 g++-4.8
-
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 10 --slave /usr/bin/g++ g++ /usr/bin/g++-4.6
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 90 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8
-
-```
-see for changing between compilers
-http://charette.no-ip.com:81/programming/2011-12-24_GCCv47/
-
-
-Get and build nessessary dependencies
-```
-mkdir source
-cd source
-git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/ubuntu12_setup.sh
+bash build-scripts/raspbian_ubuntu32_setup_3rd_part.sh
+bash build-scripts/linux_get_csi.sh
+bash build-scripts/raspbian_ubuntu32_rebuild_csi.sh
 ```
 
 
