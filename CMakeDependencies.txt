@@ -214,6 +214,7 @@ endif()
 
 #just override if we're crosscompiling for raspberry
 if(__RASPBIAN__)
+add_definitions(-DBOOST_LOG_DYN_LINK)
 set(CSI_HTTP_CLIENT_LIBS  csi-http-client csi-http-common csi-avro json_spirit snappy boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_program_options boost_filesystem boost_regex boost_chrono boost_iostreams curl cares ssl crypto rt pthread c)
 endif()
 endif()
