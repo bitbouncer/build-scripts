@@ -7,13 +7,13 @@ export CURL_VERSION=7.46.0
 export SNAPPY_VERSION=1.1.3
 export ZLIB_VERSION=1.2.8
 export BZLIB2_VERSION=1.0.6
-export OPEN_SSL_VERSION=openssl-1.0.2e
+export OPEN_SSL_VERSION=openssl-1.0.2f
 
 wget http://c-ares.haxx.se/download/c-ares-$C_ARES_VERSION.tar.gz
 tar xf c-ares-$C_ARES_VERSION.tar.gz
 rm -f c-ares-$C_ARES_VERSION.tar.gz
 
-wget http://curl.haxx.se/download/curl-$CURL_VERSION.tar.bz2 -Ocurl-$CURL_VERSION.tar.bz2
+wget --no-check-certificate https://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
 tar xf curl-$CURL_VERSION.tar.bz2
 rm  curl-$CURL_VERSION.tar.bz2
 
@@ -33,7 +33,7 @@ wget http://www.bzip.org/$BZLIB2_VERSION/bzip2-$BZLIB2_VERSION.tar.gz
 tar xvf bzip2-$BZLIB2_VERSION.tar.gz
 rm bzip2-$BZLIB2_VERSION.tar.gz
 
-wget  http://www.openssl.org/source/$OPEN_SSL_VERSION.tar.gz -O$OPEN_SSL_VERSION.tar.gz
+wget --no-check-certificate http://openssl.org/source/%OPEN_SSL_VERSION%.tar.gz
 tar xf $OPEN_SSL_VERSION.tar.gz
 rm $OPEN_SSL_VERSION.tar.gz
 
@@ -41,7 +41,7 @@ rm $OPEN_SSL_VERSION.tar.gz
 #tar xf avro-cpp-$AVRO_VERSION.tar.gz
 #rm avro-cpp-$AVRO_VERSION.tar.gz
 
-wget --no-check-certificate https://github.com/joyent/http-parser/archive/v$JOYENT_HTTP_VERSION.tar.gz -Ohttp_parser-v$JOYENT_HTTP_VERSION.tar.gz
+wget --no-check-certificate https://github.com/nodejs/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 tar xf http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 rm http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 

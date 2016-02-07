@@ -6,11 +6,11 @@ export SQLPP11_VERSION=0.33
 export C_ARES_VERSION=1.10.0
 export CURL_VERSION=7.46.0
 
-wget http://c-ares.haxx.se/download/c-ares-$C_ARES_VERSION.tar.gz
+wget --no-check-certificate http://c-ares.haxx.se/download/c-ares-$C_ARES_VERSION.tar.gz
 tar xvf c-ares-$C_ARES_VERSION.tar.gz
 rm -f c-ares-$C_ARES_VERSION.tar.gz
 
-wget http://curl.haxx.se/download/curl-$CURL_VERSION.tar.gz
+wget --no-check-certificate https://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
 tar xvf curl-$CURL_VERSION.tar.gz
 rm -f curl-$CURL_VERSION.tar.gz
 
@@ -28,7 +28,7 @@ rm -rf avro/lang/c++/avro
 mkdir avro/lang/c++/avro
 cp -r avro/lang/c++/api* avro/lang/c++/avro
 
-wget --no-check-certificate  https://github.com/joyent/http-parser/archive/v$JOYENT_HTTP_VERSION.tar.gz -Ohttp_parser-v$JOYENT_HTTP_VERSION.tar.gz
+wget --no-check-certificate https://github.com/nodejs/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 tar -xvf http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 rm -f http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 
