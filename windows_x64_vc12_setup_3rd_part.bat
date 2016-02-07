@@ -5,7 +5,7 @@ set VISUALSTUDIO_VERSION=12.0
 set VISUALSTUDIO_VERSION_MAJOR=12
 set BOOST_VERSION=1_59_0
 set BOOST_VERSION_DOTTED=1.59.0
-set OPEN_SSL_VERSION=openssl-1.0.2e
+set OPEN_SSL_VERSION=openssl-1.0.2f
 
 REM set C_ARES_VERSION=1.10.0
 REM set CARES_DIR=c-ares-%C_ARES_VERSION%
@@ -45,17 +45,17 @@ gzip -d snappy-%SNAPPY_VERSION%.tar.gz
 tar xf snappy-%SNAPPY_VERSION%.tar
 del snappy-%SNAPPY_VERSION%.tar
 
-wget http://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
+wget --no-check-certificate https://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
 gzip -d curl-%CURL_VERSION%.tar.gz
 tar xf curl-%CURL_VERSION%.tar
 del curl-%CURL_VERSION%.tar
 
-wget --no-check-certificate https://github.com/joyent/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
+wget --no-check-certificate https://github.com/nodejs/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 gzip -d http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 tar xf http_parser-v%JOYENT_HTTP_VERSION%.tar
 del http_parser-v%JOYENT_HTTP_VERSION%.tar
 
-wget  http://www.openssl.org/source/%OPEN_SSL_VERSION%.tar.gz 
+wget --no-check-certificate http://openssl.org/source/%OPEN_SSL_VERSION%.tar.gz 
 gzip -d %OPEN_SSL_VERSION%.tar.gz
 tar xf %OPEN_SSL_VERSION%.tar
 del %OPEN_SSL_VERSION%.tar
