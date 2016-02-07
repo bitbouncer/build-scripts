@@ -11,7 +11,7 @@ Downloads and builds (where needed)
   * boost              1.59
   * snappy             1.1.3
   * avro_cpp           1.7.7
-  * openSSL            1.0.2e (windows+raspberry)
+  * openSSL            1.0.2f (windows+raspberry)
   * zlib               1.2.8  (windows)
   * 
   
