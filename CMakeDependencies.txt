@@ -3,7 +3,7 @@ SET(SNAPPY_PATH             ${CMAKE_SOURCE_DIR}/../snappy-1.1.3)
 SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
 SET(BOOST_PATH              ${CMAKE_SOURCE_DIR}/../boost_1_59_0)
 SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
-SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.46.0)
+SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.47.1)
 
 # WE ARE CURRENTLY USING A BRANCH OF AVRO CPP (snappy compression and less warnings)
 #SET(AVROCPP_PATH          ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
