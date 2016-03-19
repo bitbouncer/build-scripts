@@ -11,7 +11,7 @@ Downloads and builds (where needed)
   * boost              1.59
   * snappy             1.1.3
   * avro_cpp           1.7.7
-  * openSSL            1.0.2e (windows+raspberry)
+  * openSSL            1.0.2f (windows+raspberry)
   * zlib               1.2.8  (windows)
   * 
   
@@ -45,8 +45,6 @@ mkdir source
 cd source
 git clone https://github.com/bitbouncer/build-scripts.git
 bash build-scripts/linux_setup_3rd_part.sh
-(run this part first - it will stop after a sudo)
-
 bash build-scripts/linux_get_csi.sh
 bash build-scripts/linux_rebuild_csi.sh
 ```

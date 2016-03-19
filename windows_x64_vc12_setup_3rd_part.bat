@@ -5,7 +5,7 @@ set VISUALSTUDIO_VERSION=12.0
 set VISUALSTUDIO_VERSION_MAJOR=12
 set BOOST_VERSION=1_59_0
 set BOOST_VERSION_DOTTED=1.59.0
-set OPEN_SSL_VERSION=openssl-1.0.2e
+set OPEN_SSL_VERSION=openssl-1.0.2g
 
 REM set C_ARES_VERSION=1.10.0
 REM set CARES_DIR=c-ares-%C_ARES_VERSION%
@@ -20,13 +20,16 @@ set JOYENT_HTTP_VERSION=2.3
 
 call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\vcvarsall.bat" amd64
 
+
+SET INCLUDE=%INCLUDE%;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include;
+
 REM wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-%AVRO_VERSION%/cpp/avro-cpp-%AVRO_VERSION%.tar.gz
 REM tar xvf avro-cpp-%AVRO_VERSION%.tar.gz
 REM  del avro-cpp-%AVRO_VERSION%.tar.gz
 REM until avro changes gets merged
 
 
-wget http://sourceforge.net/projects/boost/files/boost/%BOOST_VERSION_DOTTED%/boost_%BOOST_VERSION%.tar.gz/download -Oboost_%BOOST_VERSION%.tar.gz
+wget --no-check-certificate http://sourceforge.net/projects/boost/files/boost/%BOOST_VERSION_DOTTED%/boost_%BOOST_VERSION%.tar.gz/download -Oboost_%BOOST_VERSION%.tar.gz
 gzip -d boost_%BOOST_VERSION%.tar.gz
 tar xf boost_%BOOST_VERSION%.tar
 del boost_%BOOST_VERSION%.tar
@@ -45,17 +48,17 @@ gzip -d snappy-%SNAPPY_VERSION%.tar.gz
 tar xf snappy-%SNAPPY_VERSION%.tar
 del snappy-%SNAPPY_VERSION%.tar
 
-wget http://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
+wget --no-check-certificate https://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
 gzip -d curl-%CURL_VERSION%.tar.gz
 tar xf curl-%CURL_VERSION%.tar
 del curl-%CURL_VERSION%.tar
 
-wget --no-check-certificate https://github.com/joyent/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
+wget --no-check-certificate https://github.com/nodejs/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 gzip -d http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 tar xf http_parser-v%JOYENT_HTTP_VERSION%.tar
 del http_parser-v%JOYENT_HTTP_VERSION%.tar
 
-wget  http://www.openssl.org/source/%OPEN_SSL_VERSION%.tar.gz 
+wget --no-check-certificate http://openssl.org/source/%OPEN_SSL_VERSION%.tar.gz 
 gzip -d %OPEN_SSL_VERSION%.tar.gz
 tar xf %OPEN_SSL_VERSION%.tar
 del %OPEN_SSL_VERSION%.tar
@@ -151,8 +154,8 @@ cd ..
 cd boost_%BOOST_VERSION%
 rmdir /s /q bin.v2
 call bootstrap.bat
-#b2 -j 4 -toolset=msvc-%VISUALSTUDIO_VERSION% address-model=64 --build-type=complete link=static --stagedir=lib\x64 stage -s ZLIB_SOURCE=%CD%\..\zlib-%ZLIB_VERSION%
-b2 -j 4 -toolset=msvc-%VISUALSTUDIO_VERSION% address-model=64 --build-type=complete --stagedir=lib\x64 stage -s ZLIB_SOURCE=%CD%\..\zlib-%ZLIB_VERSION%
+#b2 -j 4 -toolset=msvc-%VISUALSTUDIO_VERSION% include="C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include" address-model=64 --build-type=complete link=static --stagedir=lib\x64 stage -s ZLIB_SOURCE=%CD%\..\zlib-%ZLIB_VERSION%
+b2 -j 4 -toolset=msvc-%VISUALSTUDIO_VERSION% include="C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include" address-model=64 --build-type=complete --abbreviate-paths --stagedir=lib\x64 stage -s ZLIB_SOURCE=%CD%\..\zlib-%ZLIB_VERSION%
 rmdir /s /q bin.v2
 cd ..
 
