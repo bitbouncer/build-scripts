@@ -28,9 +28,9 @@ rm -rf avro/lang/c++/avro
 mkdir avro/lang/c++/avro
 cp -r avro/lang/c++/api/* avro/lang/c++/avro
 
-wget --no-check-certificate https://github.com/nodejs/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
-tar -xvf http_parser-v$JOYENT_HTTP_VERSION.tar.gz
-rm -f http_parser-v$JOYENT_HTTP_VERSION.tar.gz
+wget --no-check-certificate https://github.com/nodejs/http-parser/archive/v$JOYENT_HTTP_VERSION.tar.gz -Ohttp_parser.tar.gz
+tar xvf http_parser.tar.gz
+rm -f http_parser.tar.gz
 
 #wget --no-check-certificate https://github.com/rbock/sqlpp11/archive/$SQLPP11_VERSION.tar.gz -Osqlpp11-v$SQLPP11_VERSION.tar.gz
 #tar -xvf sqlpp11-v$SQLPP11_VERSION.tar.gz
