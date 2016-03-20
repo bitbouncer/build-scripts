@@ -3,14 +3,14 @@ export BOOST_VERSION=1_59_0
 export BOOST_VERSION_DOTTED=1.59.0
 export JOYENT_HTTP_VERSION=2.3
 #export SQLPP11_VERSION=0.33
-export C_ARES_VERSION=1.10.0
+export C_ARES_VERSION=1.11.0
 export CURL_VERSION=7.47.1
 
 wget --no-check-certificate http://c-ares.haxx.se/download/c-ares-$C_ARES_VERSION.tar.gz
 tar xvf c-ares-$C_ARES_VERSION.tar.gz
 rm -f c-ares-$C_ARES_VERSION.tar.gz
 
-wget --no-check-certificate https://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
+wget --no-check-certificate https://curl.haxx.se/download/curl-$CURL_VERSION.tar.gz
 tar xvf curl-$CURL_VERSION.tar.gz
 rm -f curl-$CURL_VERSION.tar.gz
 
@@ -26,7 +26,7 @@ rm -f snappy-$SNAPPY_VERSION.tar.gz
 git clone https://github.com/bitbouncer/avro.git
 rm -rf avro/lang/c++/avro
 mkdir avro/lang/c++/avro
-cp -r avro/lang/c++/api* avro/lang/c++/avro
+cp -r avro/lang/c++/api/* avro/lang/c++/avro
 
 wget --no-check-certificate https://github.com/nodejs/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 tar -xvf http_parser-v$JOYENT_HTTP_VERSION.tar.gz
