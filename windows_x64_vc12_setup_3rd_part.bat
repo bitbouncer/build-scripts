@@ -7,9 +7,9 @@ set BOOST_VERSION=1_59_0
 set BOOST_VERSION_DOTTED=1.59.0
 set OPEN_SSL_VERSION=openssl-1.0.2g
 
-REM set C_ARES_VERSION=1.10.0
+set C_ARES_VERSION=1.11.0
 REM set CARES_DIR=c-ares-%C_ARES_VERSION%
-set CARES_DIR=c-ares-master
+REM set CARES_DIR=c-ares-master
 set CURL_VERSION=7.47.1
 set ZLIB_VERSION=1.2.8
 set SNAPPY_VERSION=1.1.3
@@ -23,51 +23,46 @@ call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\v
 
 SET INCLUDE=%INCLUDE%;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include;
 
-REM wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-%AVRO_VERSION%/cpp/avro-cpp-%AVRO_VERSION%.tar.gz
+REM wget --no-check-certificate ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-%AVRO_VERSION%/cpp/avro-cpp-%AVRO_VERSION%.tar.gz
 REM tar xvf avro-cpp-%AVRO_VERSION%.tar.gz
-REM  del avro-cpp-%AVRO_VERSION%.tar.gz
+REM del avro-cpp-%AVRO_VERSION%.tar.gz
 REM until avro changes gets merged
-
 
 wget --no-check-certificate http://sourceforge.net/projects/boost/files/boost/%BOOST_VERSION_DOTTED%/boost_%BOOST_VERSION%.tar.gz/download -Oboost_%BOOST_VERSION%.tar.gz
 gzip -d boost_%BOOST_VERSION%.tar.gz
 tar xf boost_%BOOST_VERSION%.tar
 del boost_%BOOST_VERSION%.tar
 
-REM wget http://c-ares.haxx.se/download/c-ares-%C_ARES_VERSION%.tar.gz
-REM tar xvf c-ares-%C_ARES_VERSION%.tar.gz
-REM del c-ares-%C_ARES_VERSION%.tar.gz
-REM until badger merges vs2013 support
-
-wget --no-check-certificate https://github.com/bagder/c-ares/archive/master.zip  -Oc-ares.zip
+REM wget --no-check-certificate https://github.com/bagder/c-ares/archive/master.zip -Oc-ares.zip
+wget --no-check-certificate http://c-ares.haxx.se/download/c-ares-%C_ARES_VERSION%.tar.gz -Oc-ares.zip
 unzip c-ares.zip
 del c-ares.zip
 
-wget --no-check-certificate https://github.com/google/snappy/releases/download/%SNAPPY_VERSION%/snappy-%SNAPPY_VERSION%.tar.gz  -Osnappy-%SNAPPY_VERSION%.tar.gz
-gzip -d snappy-%SNAPPY_VERSION%.tar.gz
-tar xf snappy-%SNAPPY_VERSION%.tar
-del snappy-%SNAPPY_VERSION%.tar
+wget --no-check-certificate https://github.com/google/snappy/releases/download/%SNAPPY_VERSION%/snappy-%SNAPPY_VERSION%.tar.gz  -Osnappy.tar.gz
+gzip -d snappy.tar.gz
+tar xf snappy.tar
+del snappy.tar
 
-wget --no-check-certificate https://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
-gzip -d curl-%CURL_VERSION%.tar.gz
-tar xf curl-%CURL_VERSION%.tar
-del curl-%CURL_VERSION%.tar
+wget --no-check-certificate https://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz -Ocurl.tar.gz
+gzip -d curl.tar.gz
+tar xf curl.tar
+del curl.tar
 
-wget --no-check-certificate https://github.com/nodejs/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
-gzip -d http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
-tar xf http_parser-v%JOYENT_HTTP_VERSION%.tar
-del http_parser-v%JOYENT_HTTP_VERSION%.tar
+wget --no-check-certificate https://github.com/nodejs/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser.tar.gz
+gzip -d http_parser.tar.gz
+tar xf http_parser.tar
+del http_parser.tar
 
-wget --no-check-certificate http://openssl.org/source/%OPEN_SSL_VERSION%.tar.gz 
-gzip -d %OPEN_SSL_VERSION%.tar.gz
-tar xf %OPEN_SSL_VERSION%.tar
-del %OPEN_SSL_VERSION%.tar
+wget --no-check-certificate http://openssl.org/source/%OPEN_SSL_VERSION%.tar.gz -Oopenssl.tar.gz
+gzip -d openssl.tar.gz
+tar xf openssl.tar
+del openssl.tar
 rmdir /s /q %OPEN_SSL_VERSION%\include
 
-wget http://zlib.net/zlib-%ZLIB_VERSION%.tar.gz
-gzip -d zlib-%ZLIB_VERSION%.tar.gz
-tar xf zlib-%ZLIB_VERSION%.tar
-del zlib-%ZLIB_VERSION%.tar
+wget http://zlib.net/zlib-%ZLIB_VERSION%.tar.gz -Ozlib.tar.gz
+gzip -d zlib.tar.gz
+tar xf zlib.tar
+del zlib.tar
 
 @ECHO BUILDING OPEN_SSL
 cd %OPEN_SSL_VERSION%
