@@ -13,8 +13,7 @@ SET(AVROCPP_PATH            ${CMAKE_SOURCE_DIR}/../avro/lang/c++)
 SET(HTTP_PARSER_PATH        ${CMAKE_SOURCE_DIR}/../http-parser-2.3)
 
 if(WIN32)
-SET(C_ARES_PATH           ${CMAKE_SOURCE_DIR}/../c-ares-1.11.0)  release does not compile with vs2013 (trunk does)
-#SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares-master)
+SET(C_ARES_PATH           ${CMAKE_SOURCE_DIR}/../c-ares-1.11.0)
 endif()
 
 if(__LINUX__)

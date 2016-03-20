@@ -8,8 +8,7 @@ set BOOST_VERSION_DOTTED=1.59.0
 set OPEN_SSL_VERSION=openssl-1.0.2g
 
 set C_ARES_VERSION=1.11.0
-REM set CARES_DIR=c-ares-%C_ARES_VERSION%
-REM set CARES_DIR=c-ares-master
+set CARES_DIR=c-ares-%C_ARES_VERSION%
 set CURL_VERSION=7.47.1
 set ZLIB_VERSION=1.2.8
 set SNAPPY_VERSION=1.1.3
@@ -34,9 +33,10 @@ tar xf boost_%BOOST_VERSION%.tar
 del boost_%BOOST_VERSION%.tar
 
 REM wget --no-check-certificate https://github.com/bagder/c-ares/archive/master.zip -Oc-ares.zip
-wget --no-check-certificate http://c-ares.haxx.se/download/c-ares-%C_ARES_VERSION%.tar.gz -Oc-ares.zip
-unzip c-ares.zip
-del c-ares.zip
+wget --no-check-certificate http://c-ares.haxx.se/download/c-ares-%C_ARES_VERSION%.tar.gz -Oc-ares.tar.gz
+gzip -d c-ares.tar.gz
+tar xf c-ares.tar
+del c-ares.tar
 
 wget --no-check-certificate https://github.com/google/snappy/releases/download/%SNAPPY_VERSION%/snappy-%SNAPPY_VERSION%.tar.gz  -Osnappy.tar.gz
 gzip -d snappy.tar.gz
@@ -53,7 +53,7 @@ gzip -d http_parser.tar.gz
 tar xf http_parser.tar
 del http_parser.tar
 
-wget --no-check-certificate http://openssl.org/source/%OPEN_SSL_VERSION%.tar.gz -Oopenssl.tar.gz
+wget --no-check-certificate https://openssl.org/source/%OPEN_SSL_VERSION%.tar.gz -Oopenssl.tar.gz
 gzip -d openssl.tar.gz
 tar xf openssl.tar
 del openssl.tar
