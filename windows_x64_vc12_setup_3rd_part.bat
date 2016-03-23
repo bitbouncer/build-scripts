@@ -31,6 +31,7 @@ wget --no-check-certificate http://sourceforge.net/projects/boost/files/boost/%B
 gzip -d boost_%BOOST_VERSION%.tar.gz
 tar xf boost_%BOOST_VERSION%.tar
 del boost_%BOOST_VERSION%.tar
+move boost_%BOOST_VERSION% boost
 
 REM wget --no-check-certificate https://github.com/bagder/c-ares/archive/master.zip -Oc-ares.zip
 wget --no-check-certificate http://c-ares.haxx.se/download/c-ares-%C_ARES_VERSION%.tar.gz -Oc-ares.tar.gz
@@ -146,7 +147,7 @@ nmake -f win32/Makefile.msc
 cd ..
 
 @ECHO BUILDING BOOST
-cd boost_%BOOST_VERSION%
+cd boost
 rmdir /s /q bin.v2
 call bootstrap.bat
 #b2 -j 4 -toolset=msvc-%VISUALSTUDIO_VERSION% include="C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Include" address-model=64 --build-type=complete link=static --stagedir=lib\x64 stage -s ZLIB_SOURCE=%CD%\..\zlib-%ZLIB_VERSION%

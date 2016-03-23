@@ -20,6 +20,7 @@ rm  curl-$CURL_VERSION.tar.bz2
 wget http://sourceforge.net/projects/boost/files/boost/$BOOST_VERSION_DOTTED/boost_$BOOST_VERSION.tar.gz/download -Oboost_$BOOST_VERSION.tar.gz
 tar xf boost_$BOOST_VERSION.tar.gz
 rm boost_$BOOST_VERSION.tar.gz
+mv boost_$BOOST_VERSION boost
 
 wget --no-check-certificate https://github.com/google/snappy/releases/download/$SNAPPY_VERSION/snappy-$SNAPPY_VERSION.tar.gz  -Osnappy-$SNAPPY_VERSION.tar.gz
 tar xf snappy-$SNAPPY_VERSION.tar.gz
@@ -45,7 +46,7 @@ wget --no-check-certificate https://github.com/nodejs/http-parser/archive/v%JOYE
 tar xf http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 rm http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 
-cd boost_$BOOST_VERSION
+cd boost
 echo "using gcc : arm : arm-linux-gnueabihf-g++ ;" > ~/user-config.jam
 ./bootstrap.sh
 ./b2 -j 5 -s ZLIB_SOURCE=$PWD/../zlib-$ZLIB_VERSION  -s BZIP2_SOURCE=$PWD/../bzip2-$BZLIB2_VERSION toolset=gcc-arm

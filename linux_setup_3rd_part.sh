@@ -39,8 +39,9 @@ rm -f http_parser.tar.gz
 wget http://sourceforge.net/projects/boost/files/boost/$BOOST_VERSION_DOTTED/boost_$BOOST_VERSION.tar.gz/download -Oboost_$BOOST_VERSION.tar.gz
 tar xf boost_$BOOST_VERSION.tar.gz
 rm -f boost_$BOOST_VERSION.tar.gz
+mv boost_$BOOST_VERSION boost
 
-cd boost_$BOOST_VERSION
+cd boost
 ./bootstrap.sh
 ./b2 -j 4 link=static 
 cd ..
