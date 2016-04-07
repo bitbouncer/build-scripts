@@ -35,7 +35,7 @@ build-scripts\windows_x64_vc12_rebuild_csi.bat
 Install build tools
 ```
 sudo apt-get update
-sudo apt-get install -y automake autogen shtool libtool git wget cmake unzip build-essential g++ python-dev autotools-dev libicu-dev zlib1g-dev openssl libssl-dev libcurl4-openssl-dev libbz2-dev libcurl3 libpq-dev
+sudo apt-get install -y automake autogen shtool libtool git wget cmake unzip build-essential g++ python-dev autotools-dev libicu-dev zlib1g-dev openssl libssl-dev libcurl4-openssl-dev libbz2-dev libcurl3 libpq-dev libsnappy-dev
 
 ```
 
@@ -56,7 +56,7 @@ Install build tools (as root)
 ```
 yum -y update
 yum -y groupinstall 'Development Tools'
-yum -y install automake autogen libtool git wget cmake unzip openssl redhat-lsb-core postgresql-devel openssl-devel bzip2-devel openldap  openldap-clients openldap-devel libidn-devel
+yum -y install automake autogen libtool git wget cmake unzip openssl redhat-lsb-core postgresql-devel openssl-devel bzip2-devel openldap  openldap-clients openldap-devel libidn-devel libsnappy-devel
 ```
 
 Get and build necessary dependencies
